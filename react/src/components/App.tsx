@@ -1,21 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Hls, Player, Video } from '@vime/react';
 import backgroundImage from '../assets/background.png';
 import './App.css';
-import '@vime/core/themes/default.css';
-
-const VideoPlayerContainer: React.FC<{ title: string }> = ({ title, children }) => {
-    return (
-        <div className="container">
-            <h1 className="title">{title}</h1>
-            <div className="player-container">
-                <Player controls autoplay={false}>
-                    {children}
-                </Player>
-            </div>
-        </div>
-    );
-};
+import { VideoPlayerContainer } from './VideoPlayerContainer';
 
 const HOST = 'http://localhost:3001';
 
@@ -43,21 +29,21 @@ export const App = () => {
                 <img className="image" src={backgroundImage} alt="some info" />
             </div>
             <VideoPlayerContainer title="Segments">
-                <Hls version="latest" poster={posterUrl}>
-                    <source data-src={`${HOST}/segments-list`} type="application/x-mpegURL" />
-                </Hls>
+                <video poster={posterUrl} width="400" height="300" preload="auto" controls>
+                    <source src={`${HOST}/segments-list`} type="application/x-mpegURL" />
+                </video>
             </VideoPlayerContainer>
 
             <VideoPlayerContainer title="Chunks">
-                <Video poster={posterUrl}>
-                    <source data-src={`${HOST}/video-chunk`} type="video/mp4" />
-                </Video>
+                <video width="400" height="300" controls>
+                    <source src={`${HOST}/video-chunk`} type="video/mp4" />
+                </video>
             </VideoPlayerContainer>
 
             <VideoPlayerContainer title="File">
-                <Video poster={posterUrl}>
+                <video src={`${HOST}/video-file`} width="400" height="300" controls>
                     <source data-src={`${HOST}/video-file`} type="video/mp4" />
-                </Video>
+                </video>
             </VideoPlayerContainer>
         </>
     );

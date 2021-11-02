@@ -17,6 +17,7 @@ router.get('/segments-poster', (request, response) => {
  * it will create a m3u8 list with segmented videos.
  */
 router.get('/segments-list', (request, response) => {
+    console.log('segment list2',)
     const resolvedPath = path.resolve('assets/segments/output.m3u8');
     response.sendFile(resolvedPath);
 });

@@ -13,7 +13,6 @@ router.get('/video-chunk', (request, response) => {
     const { fileSize, resolvedPath } = getFileSizeAndResolvedPath(VIDEO_FILE_PATH);
 
     const requestRangeHeader = request.headers.range;
-
     if (!requestRangeHeader) {
         response.writeHead(200, {
             'Content-Length': fileSize,
